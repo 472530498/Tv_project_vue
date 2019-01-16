@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    import * as adminAPi from '@/utils/adminAPi.js'
     export default {
         data: function () {
             return {
@@ -44,18 +45,30 @@
         methods: {
             submitForm(formName) {
                 const self = this
-                this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate(async (valid) => {
                     if (valid) {
-                        this.$axios.post('http://localhost:7001/commonModel/stateManager/login', {
-                            userid: this.ruleForm.username,
-                            password: this.ruleForm.password
-                        }).then(function (response) {
-                            console.log(response);
-                            // localStorage.setItem('ms_username', self.ruleForm.username);
-                            // self.$router.push('/');
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
+                        // this.$axios.post('http://localhost:7001/commonModel/stateManager/login', {
+                        //     userid: this.ruleForm.username,
+                        //     password: this.ruleForm.password
+                        // }).then(function (response) {
+                        //     console.log(response);
+                        //     // localStorage.setItem('ms_username', self.ruleForm.username);
+                        //     // self.$router.push('/');
+                        // }).catch(function (error) {
+                        //     console.log(error);
+                        // });
+                        try {
+                            const data = await adminAPi.adminLogin(this.ruleForm.username, this.ruleForm.password, this)
+                            localStorage.setItem('ms_username', self.ruleForm.username);
+                            self.$router.push('/');
+                        } catch (e) {
+                            console.log(e.code)
+                            console.log(e.msg)
+                            if (e.code === 101) {
+                                console.log('账号或者密码错误')
+                                this.$message.error('账号或者密码错误');
+                            }
+                        }
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -121,7 +121,22 @@
                                 title: '404页面'
                             }
                         ]
-                    }
+                    },
+                    {
+                        icon: 'el-icon-lx-edit',
+                        index: '8',
+                        title: '视频信息',
+                        subs: [
+                            {
+                                index: 'table',
+                                title: '查询视频列表'
+                            },
+                            {
+                                index: 'videoInsertForm',
+                                title: '增加一个视频'
+                            }
+                        ]
+                    },
                 ]
             }
         },
