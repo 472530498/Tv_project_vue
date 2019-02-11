@@ -94,7 +94,12 @@ export default new Router({
                 {
                     path: '/videoInsertForm',
                     component: resolve => require(['../components/page/videoInsertForm.vue'], resolve),
-                    meta: { title: 'videoInsertForm' }
+                    meta: { title: '增加' }
+                },
+                {
+                    path: '/selectVideo',
+                    component: resolve => require(['../components/page/selectVideo.vue'], resolve),
+                    meta: { title: '查询' }
                 }
             ]
         },

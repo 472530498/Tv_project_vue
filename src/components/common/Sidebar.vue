@@ -128,12 +128,12 @@
                         title: '视频信息',
                         subs: [
                             {
-                                index: 'table',
-                                title: '查询视频列表'
+                                index: 'selectVideo',
+                                title: '查询'
                             },
                             {
                                 index: 'videoInsertForm',
-                                title: '增加一个视频'
+                                title: '增加'
                             }
                         ]
                     },
