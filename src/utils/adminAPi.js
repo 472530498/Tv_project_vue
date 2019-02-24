@@ -6,6 +6,8 @@ const adminLoginApiUrl = adminApiConfig.default.adminLoginApiUrl
 const successCode = adminApiConfig.default.successCode
 const insertVideoInfoApiUrl = adminApiConfig.default.insertVideoInfo
 const selectVideoAllApiUrl = adminApiConfig.default.selectVideoAll
+const deleteVideoApiUrl = adminApiConfig.default.deleteVideo
+const updateVideoApiUrl = adminApiConfig.default.updateVideo
 
 /* 管理员登陆
  * @envelopeId：营业执照
@@ -77,6 +79,25 @@ async function insertVideoInfo(sourceName, sourceUrl, sourceTypeId, sourceTypeNa
     return info
 }
 
+async function deleteVideo(vid, ctx) {
+    console.log('deleteVideo 请求地址\n' + deleteVideoApiUrl)
+    console.log('deleteVideo 请求前\n' + new Date())
+    const url = deleteVideoApiUrl.replace('{vid}', vid)
+    const response = await ctx.$axios.get(url)
+    const dic = response.data
+    const resultCode = dic.resultCode
+    const resultMsg = dic.resultMsg
+    if (resultCode !== successCode) {
+        var error = new Error()
+        error.code = resultCode
+        error.msg = resultMsg
+        throw error
+    }
+    const info = dic.data;
+    console.log(info)
+    return info
+}
+
 async function selectVideoAll(ctx) {
     console.log('selectVideoAll 请求地址\n' + selectVideoAllApiUrl)
     console.log('selectVideoAll 请求前\n' + new Date())
@@ -95,4 +116,22 @@ async function selectVideoAll(ctx) {
     return info
 }
 
-export {adminLogin, insertVideoInfo, selectVideoAll}
+async function updateVideo(updateData, ctx) {
+    console.log('updateVideoApiUrl 请求地址\n' + updateVideoApiUrl)
+    console.log('updateVideoApiUrl 请求前\n' + new Date())
+    const response = await ctx.$axios.post(updateVideoApiUrl, {updateData: updateData})
+    const dic = response.data
+    const resultCode = dic.resultCode
+    const resultMsg = dic.resultMsg
+    if (resultCode !== successCode) {
+        var error = new Error()
+        error.code = resultCode
+        error.msg = resultMsg
+        throw error
+    }
+    const info = dic.data;
+    console.log(info)
+    return info
+}
+
+export {adminLogin, insertVideoInfo, selectVideoAll, deleteVideo, updateVideo}

@@ -151,7 +151,7 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handleEdit(index, row) {
+            async handleEdit(index, row) {
                 this.idx = index;
                 const item = this.tableData[index];
                 this.form = {
@@ -160,13 +160,21 @@
                 }
                 this.editVisible = true;
             },
-            handleDelete(index, row) {
+            async handleDelete(index, row) {
                 // this.idx = index;
                 // this.delVisible = true;
                 console.log(index)
                 console.log(row)
-
                 // TODO call deleteAPI
+                try{
+                    const data = await adminAPi.deleteVideo(this.tableData[index].video_source_id, this)
+                    this.$message('删除成功');
+                    this.tableData.splice(index, 1)
+
+                } catch (e) {
+                    console.log(e)
+                    this.$message(e.msg);
+                }
             },
             delAll() {
                 const length = this.multipleSelection.length;
@@ -182,10 +190,25 @@
                 this.multipleSelection = val;
             },
             // 保存编辑
-            saveEdit() {
-                this.$set(this.tableData, this.idx, this.form);
-                this.editVisible = false;
-                this.$message.success(`修改第 ${this.idx+1} 行成功`);
+            async saveEdit() {
+                this.$set(this.form);
+                // this.editVisible = false;
+                // this.$message.success(`修改第 ${this.idx+1} 行成功`);
+                try {
+                    await adminAPi.updateVideo({
+                        video_source_id: this.tableData[this.idx].video_source_id,
+                        video_name: this.form.video_name,
+                        video_url: this.form.video_url,
+                        video_zone_tags_id: null,
+                        video_zone_tags_name: null
+                    }, this)
+                    this.$message('更新成功');
+                    this.tableData = await adminAPi.selectVideoAll(this)
+                    this.editVisible = false;
+                } catch (e) {
+                    console.log(e)
+                    this.$message.error(e.msg);
+                }
             },
             // 确定删除
             deleteRow(){
