@@ -134,11 +134,11 @@
                                 title: '增加普通管理员'
                             },
                             {
-                                index: 'selectVideo',
+                                index: 'selectVideo4',
                                 title: '管理员浏览'
                             },
                             {
-                                index: 'selectVideo',
+                                index: 'personManager',
                                 title: '个人账号管理'
                             }
                         ]
@@ -149,7 +149,7 @@
                         title: '安卓用户管理',
                         subs: [
                             {
-                                index: 'selectVideo',
+                                index: 'selectVideo3',
                                 title: '用户浏览'
                             }
                         ]
@@ -175,11 +175,11 @@
                         title: '统计分析',
                         subs: [
                             {
-                                index: 'selectVideo',
+                                index: 'selectVideo1',
                                 title: '视频信息统计分析'
                             },
                             {
-                                index: 'selectVideo',
+                                index: 'selectVideo2',
                                 title: '用户统计分析'
                             }
                         ]

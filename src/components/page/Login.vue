@@ -60,6 +60,7 @@
                         try {
                             const data = await adminAPi.adminLogin(this.ruleForm.username, this.ruleForm.password, this)
                             localStorage.setItem('ms_username', self.ruleForm.username);
+                            localStorage.setItem('admin_rid', self.ruleForm.username);
                             self.$router.push('/');
                         } catch (e) {
                             console.log(e.code)

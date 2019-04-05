@@ -105,6 +105,11 @@ export default new Router({
                     path: '/insertAdmin',
                     component: resolve => require(['../components/page/insertAdmin.vue'], resolve),
                     meta: { title: '增加管理员' }
+                },
+                {
+                    path: '/personManager',
+                    component: resolve => require(['../components/page/personManager.vue'], resolve),
+                    meta: { title: '个人中心' }
                 }
             ]
         },

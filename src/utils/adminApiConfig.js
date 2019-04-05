@@ -11,6 +11,7 @@ const selectVideoAll = baseApiUrl + '/commonModel/videoManager/selectVideoAll' /
 const deleteVideo = baseApiUrl + '/commonModel/videoManager/deleteVideo/{vid}' // 删除指定视频
 const updateVideo = baseApiUrl + '/commonModel/videoManager/updateVideo' // 更新指定视频信息
 const insertAdmin = baseApiUrl + '/commonModel/stateManager/insertAdmin' // 增加管理员
+const changeAdminPassword = baseApiUrl + '/commonModel/stateManager/changeAdminPassword' // 增加管理员
 const successCode = 1
 
 export default {
@@ -21,5 +22,6 @@ export default {
     selectVideoAll: selectVideoAll,
     deleteVideo: deleteVideo,
     updateVideo: updateVideo,
-    insertAdmin: insertAdmin
+    insertAdmin: insertAdmin,
+    changeAdminPassword: changeAdminPassword
 }

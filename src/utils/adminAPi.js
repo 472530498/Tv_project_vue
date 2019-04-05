@@ -9,6 +9,7 @@ const selectVideoAllApiUrl = adminApiConfig.default.selectVideoAll
 const deleteVideoApiUrl = adminApiConfig.default.deleteVideo
 const updateVideoApiUrl = adminApiConfig.default.updateVideo
 const insertAdminUrl = adminApiConfig.default.insertAdmin
+const changeAdminPasswordUrl = adminApiConfig.default.changeAdminPassword
 
 /* 管理员登陆
  * @envelopeId：营业执照
@@ -152,4 +153,22 @@ async function updateVideo(updateData, ctx) {
     return info
 }
 
-export {adminLogin, insertVideoInfo, selectVideoAll, deleteVideo, updateVideo, insertAdmin}
+async function changeAdminPassword(updateData, ctx) {
+    console.log('updateVideoApiUrl 请求地址\n' + changeAdminPasswordUrl)
+    console.log('updateVideoApiUrl 请求前\n' + new Date())
+    const response = await ctx.$axios.post(changeAdminPasswordUrl, {updateData: updateData})
+    const dic = response.data
+    const resultCode = dic.resultCode
+    const resultMsg = dic.resultMsg
+    if (resultCode !== successCode) {
+        var error = new Error()
+        error.code = resultCode
+        error.msg = resultMsg
+        throw error
+    }
+    const info = dic.data;
+    console.log(info)
+    return info
+}
+
+export {adminLogin, insertVideoInfo, selectVideoAll, deleteVideo, updateVideo, insertAdmin, changeAdminPassword}
