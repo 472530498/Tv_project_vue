@@ -43,6 +43,7 @@
                         index: 'dashboard',
                         title: '系统首页'
                     },
+                    /*
                     {
                         icon: 'el-icon-lx-cascades',
                         index: 'table',
@@ -122,18 +123,64 @@
                             }
                         ]
                     },
+                    */
                     {
                         icon: 'el-icon-lx-edit',
-                        index: '8',
+                        index: '2',
+                        title: '管理员',
+                        subs: [
+                            {
+                                index: 'insertAdmin',
+                                title: '增加普通管理员'
+                            },
+                            {
+                                index: 'selectVideo',
+                                title: '管理员浏览'
+                            },
+                            {
+                                index: 'selectVideo',
+                                title: '个人账号管理'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-lx-edit',
+                        index: '3',
+                        title: '安卓用户管理',
+                        subs: [
+                            {
+                                index: 'selectVideo',
+                                title: '用户浏览'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-lx-edit',
+                        index: '4',
                         title: '视频信息',
                         subs: [
                             {
                                 index: 'selectVideo',
-                                title: '查询'
+                                title: '查询视频信息'
                             },
                             {
                                 index: 'videoInsertForm',
-                                title: '增加'
+                                title: '增加视频信息'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-lx-edit',
+                        index: '5',
+                        title: '统计分析',
+                        subs: [
+                            {
+                                index: 'selectVideo',
+                                title: '视频信息统计分析'
+                            },
+                            {
+                                index: 'selectVideo',
+                                title: '用户统计分析'
                             }
                         ]
                     },
