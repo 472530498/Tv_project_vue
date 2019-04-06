@@ -134,7 +134,7 @@
                                 title: '增加普通管理员'
                             },
                             {
-                                index: 'selectVideo4',
+                                index: 'adminManager',
                                 title: '管理员浏览'
                             },
                             {

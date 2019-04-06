@@ -110,6 +110,11 @@ export default new Router({
                     path: '/personManager',
                     component: resolve => require(['../components/page/personManager.vue'], resolve),
                     meta: { title: '个人中心' }
+                },
+                {
+                    path: '/adminManager',
+                    component: resolve => require(['../components/page/adminManager.vue'], resolve),
+                    meta: { title: '管理员浏览' }
                 }
             ]
         },
