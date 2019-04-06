@@ -33,7 +33,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                        <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑权限</el-button>
                         <el-button type="text" icon="el-icon-delete" class="red" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -46,15 +46,10 @@
 
         <!-- 编辑弹出框 -->
         <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="50px">
-                <el-form-item label="姓名">
-                    <el-input v-model="form.video_name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.video_url"></el-input>
-                </el-form-item>
-
-            </el-form>
+            <el-checkbox-group v-model="checkList">
+                <el-checkbox label="操作视频信息"></el-checkbox>
+                <el-checkbox label="统计分析能力"></el-checkbox>
+            </el-checkbox-group>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="editVisible = false">取 消</el-button>
                 <el-button type="primary" @click="saveEdit">确 定</el-button>
@@ -93,7 +88,7 @@
                     video_url: ''
                 },
                 idx: -1,
-                checkList: ['操作视频信息','统计分析能力']
+                checkList: []
             }
         },
         created() {
@@ -129,7 +124,6 @@
                         item['checkList'] = []
                         if (item.admin_action_id !== null) {
                             let arr = item.admin_action_id.split('|')
-                            console.log(arr)
                             if (arr.includes('1')) {
                                 item['checkList'].push('操作视频信息')
                             }
@@ -150,7 +144,6 @@
                 this.is_search = true;
             },
             formatter(row, column, cellValue, index) {
-                console.log(cellValue)
                 var d = new Date(cellValue);
                 var formatter = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
                 return formatter;
@@ -170,8 +163,6 @@
             async handleDelete(index, row) {
                 // this.idx = index;
                 // this.delVisible = true;
-                console.log(index)
-                console.log(row)
                 // TODO call deleteAPI
                 try{
                     const data = await adminAPi.deleteVideo(this.tableData[index].video_source_id, this)
@@ -198,19 +189,25 @@
             },
             // 保存编辑
             async saveEdit() {
-                this.$set(this.form);
-                // this.editVisible = false;
-                // this.$message.success(`修改第 ${this.idx+1} 行成功`);
+                let admin_action_id = ''
+                if (this.checkList.includes('操作视频信息')) {
+                    admin_action_id += '1'
+                }
+                if (this.checkList.includes('统计分析能力')) {
+                    if (admin_action_id !== '') {
+                        admin_action_id += '|2'
+                    } else {
+                        admin_action_id += '2'
+                    }
+                }
                 try {
-                    await adminAPi.updateVideo({
-                        video_source_id: this.tableData[this.idx].video_source_id,
-                        video_name: this.form.video_name,
-                        video_url: this.form.video_url,
-                        video_zone_tags_id: null,
-                        video_zone_tags_name: null
+                    const admin_rid = localStorage.getItem('admin_rid')
+                    await adminAPi.changeActionId({
+                        admin_rid: admin_rid,
+                        admin_action_id: admin_action_id
                     }, this)
                     this.$message('更新成功');
-                    this.tableData = await adminAPi.selectVideoAll(this)
+                    this.getData()
                     this.editVisible = false;
                 } catch (e) {
                     console.log(e)

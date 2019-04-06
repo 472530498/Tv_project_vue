@@ -13,6 +13,7 @@ const updateVideo = baseApiUrl + '/commonModel/videoManager/updateVideo' // 更�
 const insertAdmin = baseApiUrl + '/commonModel/stateManager/insertAdmin' // 增加管理员
 const changeAdminPassword = baseApiUrl + '/commonModel/stateManager/changeAdminPassword' // 增加管理员
 const selectAllAdmin = baseApiUrl + '/commonModel/stateManager/selectAllAdmin' // 查询管理员
+const changeActionId = baseApiUrl + '/commonModel/stateManager/changeActionId' // 查询管理员
 const successCode = 1
 
 export default {
@@ -25,5 +26,6 @@ export default {
     updateVideo: updateVideo,
     insertAdmin: insertAdmin,
     changeAdminPassword: changeAdminPassword,
-    selectAllAdmin: selectAllAdmin
+    selectAllAdmin: selectAllAdmin,
+    changeActionId: changeActionId
 }
