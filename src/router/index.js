@@ -115,6 +115,11 @@ export default new Router({
                     path: '/adminManager',
                     component: resolve => require(['../components/page/adminManager.vue'], resolve),
                     meta: { title: '管理员浏览' }
+                },
+                {
+                    path: '/chartsToSystem',
+                    component: resolve => require(['../components/page/chartsToSystem.vue'], resolve),
+                    meta: {title: '视频分析'}
                 }
             ]
         },

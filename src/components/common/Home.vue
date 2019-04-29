@@ -42,6 +42,7 @@
                     msg[i].name && arr.push(msg[i].name);
                 }
                 this.tagsList = arr;
+                console.error(this.tagsList)
             })
         }
     }

@@ -175,7 +175,7 @@
                         title: '统计分析',
                         subs: [
                             {
-                                index: 'selectVideo1',
+                                index: 'chartsToSystem',
                                 title: '视频信息统计分析'
                             },
                             {
